@@ -1,0 +1,30 @@
+
+    "root": true, // Eslint has not to look at parent directories for configuration
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest", // Indicates use of latest ECMAScript version
+        "sourceType": "module"
+    },
+    "extends": [
+        // Plugins: External add-ons add functionality to existing applications
+        // Extends from recommended configuration
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:jsx-a11y/recommended",
+        "prettier"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect" // Telling react plugin to detect installed react  version automatically
+        }
+    },
+    "overrides": [
+        // Regex for files to be linted by esLint
+        {
+            "files": ["*.js", "*.jsx"]
+        }
+    ] // Git commit: Taking a shapshot of project at a particular time
+}
