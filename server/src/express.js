@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 })
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: 'https://soma-market-place-frontend.vercel.app',
         credentials: true,
     }),
 )
@@ -96,7 +96,7 @@ app.use((err, req, res, next) => {
 const server = createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: 'https://soma-market-place-frontend.vercel.app',
     },
 })
 bidding(io)
