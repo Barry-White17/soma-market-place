@@ -13,6 +13,8 @@ import { makeStyles } from 'tss-react/mui'
 import withStyles from '@mui/styles/withStyles'
 import { read, update } from './api-product.js'
 import { Link, Navigate } from 'react-router-dom'
+import {useParams} from 'react-router-dom'
+import config from './../../config.js'
 
 const useStyles = makeStyles()((theme) => ({
     card: {
@@ -53,8 +55,9 @@ const useStyles = makeStyles()((theme) => ({
     },
 }))
 
-export default function EditProduct({ match }) {
+export default function EditProduct() {
     const { classes } = useStyles()
+    const{productId, shopId}= useParams() 
     const [values, setValues] = useState({
         name: '',
         description: '',
@@ -72,7 +75,7 @@ export default function EditProduct({ match }) {
         const signal = abortController.signal
         read(
             {
-                productId: match.params.productId,
+                productId: productId,
             },
             signal,
         ).then((data) => {
@@ -106,8 +109,8 @@ export default function EditProduct({ match }) {
 
         update(
             {
-                shopId: match.params.shopId,
-                productId: match.params.productId,
+                shopId: shopId,
+                productId: productId,
             },
             {
                 t: jwt.token,
@@ -127,7 +130,7 @@ export default function EditProduct({ match }) {
         setValues({ ...values, [name]: value })
     }
     const imageUrl = values.id
-        ? `/api/product/image/${values.id}?${new Date().getTime()}`
+        ? `${config.BACKEND_URL}/api/product/image/${values.id}?${new Date().getTime()}`
         : '/api/product/defaultphoto'
     if (values.redirect) {
         return <Navigate to={'/seller/shop/edit/' + match.params.shopId} />
