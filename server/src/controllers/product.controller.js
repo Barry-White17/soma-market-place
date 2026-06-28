@@ -63,8 +63,7 @@ const read = (req, res) => {
 }
 
 const update = (req, res) => {
-    let form = new formidable.IncomingForm()
-    form.keepExtensions = true
+    let form = new IncomingForm({keepExtensions: true})
     form.parse(req, async (err, fields, files) => {
         if (err) {
             return res.status(400).json({
@@ -72,11 +71,12 @@ const update = (req, res) => {
             })
         }
         let product = req.product
-        product = lodash.extend(product, fields)
+        const originalValues= firstValues(form, fields)
+        product = lodash.extend(product, originalValues)
         product.updated = Date.now()
         if (files.image) {
-            product.image.data = fs.readFileSync(files.image.path)
-            product.image.contentType = files.image.type
+            product.image.data = fs.readFileSync(files.image[0].filepath)
+            product.image.contentType = files.image[0].mimetype
         }
         try {
             let result = await product.save()
