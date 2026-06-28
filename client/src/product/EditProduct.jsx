@@ -133,7 +133,7 @@ export default function EditProduct() {
         ? `${config.BACKEND_URL}/api/product/image/${values.id}?${new Date().getTime()}`
         : '/api/product/defaultphoto'
     if (values.redirect) {
-        return <Navigate to={'/seller/shop/edit/' + match.params.shopId} />
+        return <Navigate to={'/seller/shop/edit/' + shopId} />
     }
     return (
         <div>
@@ -238,7 +238,7 @@ export default function EditProduct() {
                         Update
                     </Button>
                     <Link
-                        to={'/seller/shops/edit/' + match.params.shopId}
+                        to={'/seller/shops/edit/' + shopId}
                         className={classes.submit}
                     >
                         <Button variant='contained'>Cancel</Button>
