@@ -8,7 +8,7 @@ import { makeStyles } from 'tss-react/mui'
 import { io } from 'socket.io-client'
 import config from './../../config.js'
 
-const socket = io(config.SOCKET_URL)
+// const socket = io(config.SOCKET_URL)
 
 const useStyles = makeStyles()((theme) => ({
     bidHistory: {
@@ -33,7 +33,8 @@ export default function Bidding(props) {
     const [bid, setBid] = useState('')
 
     const jwt = auth.isAuthenticated()
-
+    
+    /*
     useEffect(() => {
         socket.emit('join auction room', { room: props.auction._id })
         return () => {
@@ -51,6 +52,7 @@ export default function Bidding(props) {
             socket.off('new bid')
         }
     })
+    */
     const handleChange = (event) => {
         setBid(event.target.value)
     }
