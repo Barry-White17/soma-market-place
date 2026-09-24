@@ -12,7 +12,7 @@ mongoose.connection.on('error', () => {
     throw new Error(`unable to connect to database: ${process.env.DATABASE_URL}`)
 })
 
-const server = app.listen(process.env.PORT, (err) => {
+app.listen(process.env.PORT, (err) => {
     if (err) {
         console.log(err)
     }
