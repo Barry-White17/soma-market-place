@@ -6,15 +6,15 @@ import bidding from './controllers/bidding.controller.js'
 // Connection URL
 mongoose.Promise = global.Promise
 
-mongoose.connect(config.mongoUri)
+mongoose.connect(process.env.DATABASE_URL)
 
 mongoose.connection.on('error', () => {
-    throw new Error(`unable to connect to database: ${config.mongoUri}`)
+    throw new Error(`unable to connect to database: ${process.env.DATABASE_URL}`)
 })
 
-const server = app.listen(config.port, (err) => {
+const server = app.listen(process.env.PORT, (err) => {
     if (err) {
         console.log(err)
     }
-    console.info('Server started on port %s.', config.port)
+    console.info('Server started on port %s.', process.env.PORT)
 })
